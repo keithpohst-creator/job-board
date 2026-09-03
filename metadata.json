@@ -1,0 +1,6 @@
+{
+  "name": "AscentJobs",
+  "description": "Candidate-focused job search platform with CV/LinkedIn analysis, AI job matching with fit explanations, saved search alerts, and personalized skills gap certifications.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
