@@ -15,7 +15,8 @@ import {
   MapPin,
   DollarSign,
   ShieldCheck,
-  RefreshCw
+  RefreshCw,
+  MessageSquare
 } from 'lucide-react';
 import { AscentLogo } from './components/AscentLogo';
 import { JobSearchFilterBar, FilterState } from './components/JobSearchFilterBar';
@@ -23,6 +24,7 @@ import { JobCard } from './components/JobCard';
 import { JobDetailModal } from './components/JobDetailModal';
 import { CandidateProfileHub } from './components/CandidateProfileHub';
 import { SkillsGapHub } from './components/SkillsGapHub';
+import { TalkToUsTab } from './components/TalkToUsTab';
 import { SavedSearchesModal } from './components/SavedSearchesModal';
 import { NotificationCenter } from './components/NotificationCenter';
 import { mockJobs, mockSavedSearches, mockInitialNotifications } from './data/mockJobs';
@@ -31,7 +33,7 @@ import { Job, CandidateProfile, SavedSearchAlert, AppNotification, RecommendedCe
 
 export default function App() {
   // Navigation
-  const [activeTab, setActiveTab] = useState<'jobs' | 'profile' | 'upskilling' | 'saved_searches'>('jobs');
+  const [activeTab, setActiveTab] = useState<'jobs' | 'profile' | 'upskilling' | 'saved_searches' | 'talk_to_us'>('jobs');
 
   // Core Candidate Profile state
   const [candidateProfile, setCandidateProfile] = useState<CandidateProfile>(initialCandidateProfile);
@@ -377,6 +379,18 @@ export default function App() {
             </button>
 
             <button
+              onClick={() => setActiveTab('talk_to_us')}
+              className={`flex items-center gap-2 px-3.5 py-2 rounded-lg transition-all ${
+                activeTab === 'talk_to_us'
+                  ? 'bg-white text-[#0952c4] shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <MessageSquare className="w-4 h-4 text-[#0952c4]" />
+              <span>Talk to Us</span>
+            </button>
+
+            <button
               onClick={() => setIsSaveSearchModalOpen(true)}
               className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all"
             >
@@ -453,12 +467,21 @@ export default function App() {
           </button>
           <button
             onClick={() => setActiveTab('upskilling')}
-            className={`flex items-center gap-1 py-1.5 px-3 rounded-lg ${
+            className={`flex items-center gap-1 py-1.5 px-2.5 rounded-lg ${
               activeTab === 'upskilling' ? 'bg-blue-50 text-[#0952c4] font-bold' : ''
             }`}
           >
             <Award className="w-3.5 h-3.5" />
-            Skills & Certs
+            Skills
+          </button>
+          <button
+            onClick={() => setActiveTab('talk_to_us')}
+            className={`flex items-center gap-1 py-1.5 px-2.5 rounded-lg ${
+              activeTab === 'talk_to_us' ? 'bg-blue-50 text-[#0952c4] font-bold' : ''
+            }`}
+          >
+            <MessageSquare className="w-3.5 h-3.5" />
+            Talk to Us
           </button>
         </div>
       </header>
@@ -590,6 +613,11 @@ export default function App() {
             averageMatchScore={averageMatchScore}
           />
         )}
+
+        {/* TAB 4: TALK TO US / DISQUS COMMUNITY */}
+        {activeTab === 'talk_to_us' && (
+          <TalkToUsTab />
+        )}
       </main>
 
       {/* Modal: Job Detail Deep Fit Analysis */}
@@ -626,7 +654,16 @@ export default function App() {
             <AscentLogo size="sm" showText={true} />
             <span className="text-slate-400">| Candidate Career Intelligence Platform</span>
           </div>
-          <p>© 2025 AscentJobs. CV and JD semantic matching engine.</p>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setActiveTab('talk_to_us')}
+              className="text-[#0952c4] hover:underline font-semibold flex items-center gap-1"
+            >
+              <MessageSquare className="w-3.5 h-3.5" />
+              Talk to Us
+            </button>
+            <p>© 2025 AscentJobs. CV and JD semantic matching engine.</p>
+          </div>
         </div>
       </footer>
     </div>
