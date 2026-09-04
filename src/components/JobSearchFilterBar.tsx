@@ -11,7 +11,9 @@ import {
   X, 
   Check, 
   Sparkles,
-  ChevronDown
+  ChevronDown,
+  Users,
+  Clock
 } from 'lucide-react';
 
 export interface FilterState {
@@ -22,7 +24,7 @@ export interface FilterState {
   selectedFamily: string;
   minSalary: number;
   workModel: string;
-  sortBy: 'match' | 'salary' | 'recent';
+  sortBy: 'match' | 'salary' | 'recent' | 'applicants';
 }
 
 interface JobSearchFilterBarProps {
@@ -312,13 +314,26 @@ export const JobSearchFilterBar: React.FC<JobSearchFilterBarProps> = ({
             </button>
             <button
               type="button"
+              onClick={() => onFilterChange({ sortBy: 'applicants' })}
+              className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold transition-colors ${
+                filters.sortBy === 'applicants'
+                  ? 'bg-white text-[#0952c4] shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <Users className="w-3 h-3 text-[#0952c4]" />
+              Most Applicants
+            </button>
+            <button
+              type="button"
               onClick={() => onFilterChange({ sortBy: 'recent' })}
-              className={`px-2.5 py-1 rounded-md text-xs font-semibold transition-colors ${
+              className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold transition-colors ${
                 filters.sortBy === 'recent'
                   ? 'bg-white text-[#0952c4] shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
+              <Clock className="w-3 h-3 text-slate-400" />
               Newest
             </button>
           </div>

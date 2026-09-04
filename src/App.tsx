@@ -296,6 +296,12 @@ export default function App() {
       if (filters.sortBy === 'salary') {
         return b.salaryMax - a.salaryMax;
       }
+      if (filters.sortBy === 'applicants') {
+        return (b.applicantsCount ?? 0) - (a.applicantsCount ?? 0);
+      }
+      if (filters.sortBy === 'recent') {
+        return (a.daysOpen ?? 0) - (b.daysOpen ?? 0);
+      }
       return 0;
     });
   }, [jobs, filters]);

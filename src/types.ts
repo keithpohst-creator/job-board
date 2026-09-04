@@ -48,6 +48,7 @@ export interface Job {
   title: string;
   company: string;
   companyLogoBg: string;
+  glassdoorRating: number;
   location: string;
   workModel: 'Remote' | 'Hybrid' | 'On-site';
   industry: string;
@@ -57,6 +58,8 @@ export interface Job {
   currency: string;
   experienceLevel: 'Entry' | 'Mid' | 'Senior' | 'Lead / Staff' | 'Director / VP';
   postedDate: string;
+  daysOpen: number;
+  applicantsCount: number;
   featured?: boolean;
   description: string;
   responsibilities: string[];
